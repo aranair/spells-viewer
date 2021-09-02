@@ -1,23 +1,32 @@
 import React from 'react';
 import './App.css';
-import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
 
-import spells from './spells.json';
+import SpellList from './pages/SpellList';
+import { ThemeProvider, createTheme } from '@material-ui/core/styles';
 
-const columns: GridColDef[] = [
-  { field: 'id', headerName: 'ID', width: 150, filterable: true },
-  { field: 'name', headerName: 'Name', width: 300, filterable: true },
-  { field: 'school', headerName: 'School', width: 200, filterable: true },
-];
+const theme = createTheme({
+  typography: {
+    "fontFamily": 'Alagard',
+    "fontSize": 16,
+  },
+  palette: {
+    type: 'dark',
+    primary: {
+      main: '#1a237e',
+    },
+    secondary: {
+      main: '#880e4f',
+    },
+  },
+});
 
 function App() {
   return (
-    <div className="App">
-      <DataGrid
-        rows={spells}
-        columns={columns}
-      />
-    </div>
+    <ThemeProvider theme={theme}>
+      <div className="App">
+        <SpellList />
+      </div>
+    </ThemeProvider>
   );
 }
 
