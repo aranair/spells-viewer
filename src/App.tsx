@@ -1,8 +1,10 @@
 import React from 'react';
-import './App.css';
-
+import styled from "@emotion/styled";
 import SpellList from './pages/SpellList';
 import { ThemeProvider, createTheme } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+
+import './App.css';
 
 const theme = createTheme({
   typography: {
@@ -20,10 +22,22 @@ const theme = createTheme({
   },
 });
 
+const HeaderContainer = styled.div`
+  display: 'block';
+  width: 800px;
+  text-align: center;
+  margin: 10px auto 0 auto;
+`;
+
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <div className="App">
+        <HeaderContainer>
+          <Typography variant="h5" component="h2">
+            Spells (for Wizards and other Adventurers)
+          </Typography>
+        </HeaderContainer>
         <SpellList />
       </div>
     </ThemeProvider>
