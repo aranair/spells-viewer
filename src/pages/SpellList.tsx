@@ -6,17 +6,17 @@ import spells from '../spells.json';
 
 const columns: GridColDef[] = [
   { field: 'id', headerName: 'ID', width: 150, filterable: true },
-  { field: 'name', headerName: 'Spell Name', width: 300, filterable: true },
+  { field: 'name', headerName: 'Spell', width: 200, filterable: true },
   { field: 'school', headerName: 'School', width: 200, filterable: true },
+  { field: 'range', headerName: 'Range', width: 200, filterable: true },
+  { field: 'duration', headerName: 'Duration', width: 300, filterable: true },
 ];
 
 const SpellListContainer = styled.div`
   display: 'block';
-  margin-top: 10vh;
+  margin: 30px auto 0 auto;
   height: 80vh;
-  width: 800px;
-  margin-left: auto;
-  margin-right: auto;
+  width: 70%;
 `;
 
 function SpellList() {
