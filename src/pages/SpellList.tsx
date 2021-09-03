@@ -16,7 +16,8 @@ const SpellListContainer = styled.div`
   display: 'block';
   margin: 30px auto 0 auto;
   height: 80vh;
-  width: 70%;
+  width: 80%;
+  max-width: 1200px;
 `;
 
 function SpellList() {
