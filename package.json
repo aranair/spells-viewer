@@ -8,8 +8,12 @@
     "@material-ui/core": "^4.12.3",
     "@material-ui/styles": "^4.11.4",
     "@mui/x-data-grid": "^4.0.0",
+    "@typechain/ethers-v5": "^7.0.1",
     "@types/react-dom": "^17.0.9",
     "cra-template-typescript": "1.1.2",
+    "ethers": "^5.4.6",
+    "mobx": "^6.3.3",
+    "mobx-react-lite": "^3.2.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
@@ -19,7 +23,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "codegen:abi": "typechain --target ethers-v5 --out-dir src/contracts ./src/abi/*.abi"
   },
   "eslintConfig": {
     "extends": [
@@ -38,5 +43,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "typechain": "^5.1.2"
   }
 }

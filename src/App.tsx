@@ -1,26 +1,15 @@
 import React from 'react';
+import { observer } from 'mobx-react-lite';
 import styled from "@emotion/styled";
-import SpellList from './pages/SpellList';
+import MySpells from './pages/MySpells';
 import { ThemeProvider, createTheme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
+import { mainTheme } from './theme';
+
+import { StoreProvider } from './store/StoreContext';
+import store from './store/RootStore';
 
 import './App.css';
-
-const theme = createTheme({
-  typography: {
-    "fontFamily": 'Alagard',
-    "fontSize": 16,
-  },
-  palette: {
-    type: 'dark',
-    primary: {
-      main: '#1a237e',
-    },
-    secondary: {
-      main: '#880e4f',
-    },
-  },
-});
 
 const HeaderContainer = styled.div`
   display: 'block';
@@ -29,19 +18,21 @@ const HeaderContainer = styled.div`
   margin: 10px auto 0 auto;
 `;
 
-function App() {
+const App = observer((): JSX.Element => {
   return (
-    <ThemeProvider theme={theme}>
-      <div className="App">
-        <HeaderContainer>
-          <Typography variant="h5" component="h2">
-            Spells (for Wizards and other Adventurers)
-          </Typography>
-        </HeaderContainer>
-        <SpellList />
-      </div>
-    </ThemeProvider>
+    <StoreProvider value={store}>
+      <ThemeProvider theme={mainTheme}>
+        <div className="App">
+          <HeaderContainer>
+            <Typography variant="h5" component="h2" color={mainTheme.palette.spellbook.brown}>
+              Spells (for Wizards and other Adventurers)
+            </Typography>
+          </HeaderContainer>
+          <MySpells />
+        </div>
+      </ThemeProvider>
+    </StoreProvider>
   );
-}
+});
 
 export default App;
