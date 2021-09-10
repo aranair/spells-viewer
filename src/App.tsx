@@ -15,7 +15,7 @@ const HeaderContainer = styled.div`
   display: 'block';
   width: 800px;
   text-align: center;
-  margin: 10px auto 0 auto;
+  margin: 100px auto 0 auto;
 `;
 
 const App = observer((): JSX.Element => {
@@ -24,7 +24,7 @@ const App = observer((): JSX.Element => {
       <ThemeProvider theme={mainTheme}>
         <div className="App">
           <HeaderContainer>
-            <Typography variant="h5" component="h2" color={mainTheme.palette.spellbook.brown}>
+            <Typography variant="h5" component="h2">
               Spells (for Wizards and other Adventurers)
             </Typography>
           </HeaderContainer>

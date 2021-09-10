@@ -5,13 +5,12 @@ import {
   Collapse,
   Container,
   IconButton,
-  makeStyles,
   Toolbar,
   Typography,
+  Link,
 } from '@material-ui/core';
 
-import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
-import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import { makeStyles } from '@material-ui/core/styles';
 
 import React, { useState, useContext } from 'react';
 import { observer } from 'mobx-react-lite';
@@ -21,6 +20,10 @@ import { mainTheme } from '../theme';
 import { StoreContext } from '../store/StoreContext';
 
 import spells from '../spells.json';
+
+const colors = {
+  darkbrown: '#5B382B'
+};
 
 const columns: GridColDef[] = [
   { field: 'id', headerName: 'ID', width: 150, filterable: true },
@@ -48,8 +51,8 @@ const useStyles = makeStyles((theme) => ({
     width: '300px',
     height: '300px',
     position: 'relative',
-    top: 95,
-    left: 135,
+    top: 70,
+    left: 110,
   },
   nameTextContainer: {
     position: 'relative',
@@ -88,16 +91,16 @@ const useStyles = makeStyles((theme) => ({
     left: 548,
     textAlign: 'left',
   },
-  nameText: { color: theme.palette.spellbook.brown, },
+  nameText: { color: theme.palette.secondary.main, },
   spellNameText: {
-    color: theme.palette.spellbook.purple,
+    color: theme.palette.primary.main,
     fontSize: '1.1em',
   },
-  spellSchoolText: { color: theme.palette.spellbook.darkbrown, },
-  spellRangeText: { color: theme.palette.spellbook.darkbrown, },
-  spellDurationText: { color: theme.palette.spellbook.darkbrown, },
-  nextText: { color: theme.palette.spellbook.darkbrown, },
-  prevText: { color: theme.palette.spellbook.darkbrown, },
+  spellSchoolText: { color: colors.darkbrown, },
+  spellRangeText: { color: colors.darkbrown, },
+  spellDurationText: { color: colors.darkbrown, },
+  nextText: { color: colors.darkbrown, },
+  prevText: { color: colors.darkbrown, },
 
   prevContainer: {
     position: 'relative',
@@ -127,6 +130,13 @@ const useStyles = makeStyles((theme) => ({
       marginTop: theme.spacing(1),
       marginBottom: theme.spacing(1),
     },
+  },
+  creditsContainer: {
+    marginTop: 100,
+    width: 950,
+    textAlign: 'right',
+  },
+  credits: {
   },
   link: {
     textDecoration: 'none',
@@ -163,7 +173,7 @@ const MySpells = observer((): JSX.Element | null => {
         user.spells && (
         <div>
           <div className={classes.spellImageContainer}>
-              <img src={`https://spells-explorer.s3.amazonaws.com/images/${user.spells[spellIdx].name.split(' ').map(s => s.toLowerCase()).join('-')}.png`} alt={`${user.spells[spellIdx].name}`} />
+              <img width="350px" height="350px" src={`https://spells-explorer.s3.amazonaws.com/images/${user.spells[spellIdx].name.split(' ').map(s => s.toLowerCase()).join('-')}.png`} alt={`${user.spells[spellIdx].name}`} />
           </div>
 
           <div className={classes.nameTextContainer}>
@@ -209,6 +219,11 @@ const MySpells = observer((): JSX.Element | null => {
                onClick={() => setSpellIdx((spellIdx + 1) % spellsCount || 0)}
             >
               Next
+            </Typography>
+          </div>
+          <div className={classes.creditsContainer}>
+            <Typography className={classes.credits}>
+              Crafted by <Link href="https://twitter.com/ozzzmabro" className={classes.link}> Ozzz </Link> & <Link href="https://twitter.com/aranair" className={classes.link}> aranair </Link>
             </Typography>
           </div>
         </div>

@@ -8,15 +8,10 @@ export const mainTheme = createMuiTheme({
   palette: {
     type: 'dark',
     primary: {
-      main: '#1a237e',
+      main: '#7E5269',
     },
     secondary: {
-      main: '#880e4f',
-    },
-    spellbook: {
-      purple: '#7E5269',
-      brown: '#E9D1A1',
-      darkbrown: '#5B382B',
+      main: '#E9D1A1',
     },
   },
 });
