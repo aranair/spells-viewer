@@ -34,9 +34,13 @@ const columns: GridColDef[] = [
 ];
 
 const useStyles = makeStyles((theme) => ({
+  wrapper:{
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   spellBookContainer: {
     background: 'url("/img/spellbook.jpeg") no-repeat',
-    margin: '30px auto 0 auto',
     width: '1000px',
     height: '600px',
   },
@@ -159,6 +163,7 @@ const MySpells = observer((): JSX.Element | null => {
   }
 
   return (
+    <div className={classes.wrapper}>
     <div className={classes.spellBookContainer}>
       <div className={classes.connectButtonContainer}>
         {
@@ -229,6 +234,7 @@ const MySpells = observer((): JSX.Element | null => {
         </div>
         )
       }
+    </div>
     </div>
   );
 });
