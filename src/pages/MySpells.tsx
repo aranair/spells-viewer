@@ -61,9 +61,8 @@ const useStyles = makeStyles((theme) => ({
   nameTextContainer: {
     position: 'relative',
     display: 'block',
-    width: 100,
     top: -206,
-    left: 663,
+    left: 215,
     textAlign: 'center',
   },
   spellNameContainer: {
@@ -113,9 +112,10 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'left',
   },
   nextContainer: {
+    width: 100,
     position: 'relative',
     top: -10,
-    left: 850,
+    left: 860,
     textAlign: 'left',
   },
 
