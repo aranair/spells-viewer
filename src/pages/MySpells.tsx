@@ -37,11 +37,17 @@ const useStyles = makeStyles((theme) => ({
     width: '1000px',
     height: '600px',
   },
+  connectButtonContainer: {
+    position: 'relative',
+    display: 'block',
+    top: 200,
+    left: -210,
+    textAlign: 'center',
+  },
   spellImageContainer: {
     width: '300px',
     height: '300px',
     position: 'relative',
-    display: 'block',
     top: 95,
     left: 135,
   },
@@ -144,15 +150,15 @@ const MySpells = observer((): JSX.Element | null => {
 
   return (
     <div className={classes.spellBookContainer}>
+      <div className={classes.connectButtonContainer}>
         {
           !user.wallet && (
-            <div className={classes.spellImageContainer}>
-              <Button variant="contained" color="secondary" onClick={user.connect}>
-                Connect
-              </Button>
-            </div>
+          <Button variant="contained" color="secondary" onClick={user.connect}>
+            Connect
+          </Button>
           )
         }
+      </div>
       {
         user.spells && (
         <div>
