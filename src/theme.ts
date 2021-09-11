@@ -1,6 +1,6 @@
-import { createMuiTheme } from '@material-ui/core/styles';
+import { createTheme } from '@material-ui/core/styles';
 
-export const mainTheme = createMuiTheme({
+export const mainTheme = createTheme({
   typography: {
     "fontFamily": 'Alagard',
     "fontSize": 16,

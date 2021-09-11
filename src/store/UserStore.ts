@@ -1,5 +1,5 @@
 import { ethers, Signer } from 'ethers';
-import { action, extendObservable } from 'mobx';
+import { runInAction, action, extendObservable } from 'mobx';
 import { spellsAddress } from '../constants';
 import { Spells__factory } from '../contracts';
 import { SpellData } from '../interface/spell-data.interface';
@@ -38,25 +38,32 @@ export class UserStore {
 
     if (app.ethereum) {
       const account = await app.ethereum.request({ method: 'eth_requestAccounts' });
+
       if (account) {
         const provider = new ethers.providers.Web3Provider(app.ethereum);
-        this.wallet = await provider.getSigner();
-        this.address = await this.wallet.getAddress();
-        const spellsContract = Spells__factory.connect(spellsAddress, this.wallet);
+        const wallet = await provider.getSigner();
+        const address = await wallet.getAddress();
+        runInAction(() => {
+          this.wallet = wallet;
+          this.address = address;
+        });
+        const spellsContract = Spells__factory.connect(spellsAddress, wallet);
 
         // Get spells
-        const spellIds = []
-        const balance = await spellsContract.balanceOf(this.address);
+        const spellIds: Array<any> = []
+        const balance = await spellsContract.balanceOf(address);
         for(var i = 0; i < Number(balance); i++){
-          const spellId = await spellsContract.tokenOfOwnerByIndex(this.address, i);
+          const spellId = await spellsContract.tokenOfOwnerByIndex(address, i);
           spellIds.push(spellId)
         }
 
-        // Numbers
-        const collection = spellIds.map((id) => Number(id.toString()));
-        this.collection = collection;
-        const ownedSpells = spellsList.filter(spell => collection.includes(spell.id));
-        this.spells = ownedSpells;
+        runInAction(() => {
+          // Numbers
+          const collection = spellIds.map((id) => Number(id.toString()));
+          this.collection = collection;
+          const ownedSpells = spellsList.filter(spell => collection.includes(spell.id));
+          this.spells = ownedSpells;
+        });
       }
     }
   });
