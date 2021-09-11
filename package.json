@@ -28,6 +28,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "deploy": "gh-pages -d build",
     "codegen:abi": "typechain --target ethers-v5 --out-dir src/contracts ./src/abi/*.abi"
   },
   "eslintConfig": {
@@ -49,6 +50,7 @@
     ]
   },
   "devDependencies": {
+    "gh-pages": "^3.2.3",
     "typechain": "^5.1.2"
   }
 }
