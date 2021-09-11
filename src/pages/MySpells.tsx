@@ -1,48 +1,30 @@
 import {
-  AppBar,
-  Avatar,
   Button,
-  Collapse,
-  Container,
-  IconButton,
-  Toolbar,
   Typography,
   Link,
+  makeStyles,
 } from '@material-ui/core';
-
-import { makeStyles } from '@material-ui/core/styles';
 
 import React, { useState, useContext } from 'react';
 import { observer } from 'mobx-react-lite';
-import styled from "@emotion/styled";
-import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { mainTheme } from '../theme';
 import { StoreContext } from '../store/StoreContext';
-
-import spells from '../spells.json';
 
 const colors = {
   darkbrown: '#5B382B'
 };
-
-const columns: GridColDef[] = [
-  { field: 'id', headerName: 'ID', width: 150, filterable: true },
-  { field: 'name', headerName: 'Spell', width: 200, filterable: true },
-  { field: 'school', headerName: 'School', width: 200, filterable: true },
-  { field: 'range', headerName: 'Range', width: 200, filterable: true },
-  { field: 'duration', headerName: 'Duration', width: 300, filterable: true },
-];
 
 const useStyles = makeStyles((theme) => ({
   wrapper:{
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    flexDirection: 'column',
   },
   spellBookContainer: {
     background: 'url("/img/spellbook.jpeg") no-repeat',
     width: '1000px',
-    height: '600px',
+    height: '570px',
   },
   connectButtonContainer: {
     position: 'relative',
@@ -102,8 +84,8 @@ const useStyles = makeStyles((theme) => ({
   spellSchoolText: { color: colors.darkbrown, },
   spellRangeText: { color: colors.darkbrown, },
   spellDurationText: { color: colors.darkbrown, },
-  nextText: { color: colors.darkbrown, },
-  prevText: { color: colors.darkbrown, },
+  nextText: { color: colors.darkbrown, cursor: 'pointer '},
+  prevText: { color: colors.darkbrown, cursor: 'pointer' },
 
   prevContainer: {
     position: 'relative',
@@ -136,11 +118,8 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   creditsContainer: {
-    marginTop: 100,
     width: 950,
     textAlign: 'right',
-  },
-  credits: {
   },
   link: {
     textDecoration: 'none',
@@ -226,14 +205,14 @@ const MySpells = observer((): JSX.Element | null => {
               Next
             </Typography>
           </div>
-          <div className={classes.creditsContainer}>
-            <Typography className={classes.credits}>
-              Crafted by <Link href="https://twitter.com/ozzzmabro" className={classes.link}> Ozzz </Link> & <Link href="https://twitter.com/aranair" className={classes.link}> aranair </Link>
-            </Typography>
-          </div>
         </div>
         )
       }
+    </div>
+    <div className={classes.creditsContainer}>
+      <Typography>
+        Crafted by <Link href="https://twitter.com/ozzzmabro" className={classes.link}>Ozzz</Link> & <Link href="https://twitter.com/aranair" className={classes.link}>aranair</Link>
+      </Typography>
     </div>
     </div>
   );
