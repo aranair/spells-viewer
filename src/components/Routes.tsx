@@ -5,7 +5,7 @@ import SpellList from '../pages/SpellList';
 export default function Routes(): JSX.Element {
   return (
     <Switch>
-      <Route exact path="/">
+      <Route exact path="">
         <MySpells />
       </Route>
       <Route path="/explore">

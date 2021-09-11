@@ -39,7 +39,6 @@ export class UserStore {
     if (app.ethereum) {
       const account = await app.ethereum.request({ method: 'eth_requestAccounts' });
       if (account) {
-        console.log('account connected')
         const provider = new ethers.providers.Web3Provider(app.ethereum);
         this.wallet = await provider.getSigner();
         this.address = await this.wallet.getAddress();
@@ -57,7 +56,6 @@ export class UserStore {
         const collection = spellIds.map((id) => Number(id.toString()));
         this.collection = collection;
         const ownedSpells = spellsList.filter(spell => collection.includes(spell.id));
-        console.log(ownedSpells)
         this.spells = ownedSpells;
       }
     }
