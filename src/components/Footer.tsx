@@ -1,6 +1,4 @@
 import {
-  Typography,
-  Container,
   makeStyles,
 } from '@material-ui/core';
 
@@ -31,14 +29,14 @@ export default function Routes(): JSX.Element {
   return (
     <div className={classes.footerContainer}>
       {
-        location.pathname == '/' &&
+        location.pathname === '/' &&
         <Link to="#" className={classes.link} onClick={() => history.push("/explore")}><ListAltIcon /></Link>
       }
       {
-        location.pathname == '/explore' &&
+        location.pathname === '/explore' &&
         <Link to="#" className={classes.link} onClick={() => history.push("/")}><AccessibilityNewIcon /></Link>
       }
-       <a href="https://github.com/aranair/spells-viewer" target="_blank" className={classes.link}>
+       <a href="https://github.com/aranair/spells-viewer" target="_blank" rel="noreferrer" className={classes.link}>
          <GitHubIcon />
        </a>
     </div>
