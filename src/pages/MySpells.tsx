@@ -22,7 +22,6 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
   },
   spellBookContainer: {
-    background: 'url("/img/spellbook.jpeg") no-repeat',
     width: '1000px',
     height: '570px',
   },
@@ -37,13 +36,13 @@ const useStyles = makeStyles((theme) => ({
     width: '300px',
     height: '300px',
     position: 'relative',
-    top: 70,
-    left: 110,
+    top: 72,
+    left: 104,
   },
   nameTextContainer: {
     position: 'relative',
     display: 'block',
-    top: -206,
+    top: -210,
     left: 215,
     textAlign: 'center',
   },
@@ -51,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
     position: 'relative',
     display: 'block',
     width: 400,
-    top: -198,
+    top: -200,
     left: 515,
     textAlign: 'center',
   },
@@ -89,15 +88,15 @@ const useStyles = makeStyles((theme) => ({
 
   prevContainer: {
     position: 'relative',
-    top: 15,
-    left: 100,
+    top: 5,
+    left: 90,
     textAlign: 'left',
   },
   nextContainer: {
     width: 100,
     position: 'relative',
-    top: -10,
-    left: 860,
+    top: -20,
+    left: 870,
     textAlign: 'left',
   },
 
@@ -141,9 +140,13 @@ const MySpells = observer((): JSX.Element | null => {
     spellsCount = user.spells.length;
   }
 
+  const spellSchool = user.spells && user.spells[spellIdx].school || 'none';
+  var backgroundImage = `url("/img/spellbook_${spellSchool}.png") no-repeat`;
+
+  // background: `url("/img/spellbook_${school}.png") no-repeat`,
   return (
     <div className={classes.wrapper}>
-    <div className={classes.spellBookContainer}>
+    <div className={classes.spellBookContainer} style={{ background: backgroundImage }}>
       <div className={classes.connectButtonContainer}>
         {
           !user.wallet && (
@@ -157,7 +160,7 @@ const MySpells = observer((): JSX.Element | null => {
         user.spells && (
         <div>
           <div className={classes.spellImageContainer}>
-              <img width="350px" height="350px" src={`https://spells-explorer.s3.amazonaws.com/images/${user.spells[spellIdx].name.split(' ').map(s => s.toLowerCase()).join('-')}.png`} alt={`${user.spells[spellIdx].name}`} />
+              <img width="342px" height="342px" src={`https://spells-explorer.s3.amazonaws.com/images/${user.spells[spellIdx].name.split(' ').map(s => s.toLowerCase()).join('-')}.png`} alt={`${user.spells[spellIdx].name}`} />
           </div>
 
           <div className={classes.nameTextContainer}>
@@ -182,7 +185,7 @@ const MySpells = observer((): JSX.Element | null => {
 
           <div className={classes.spellDurationContainer}>
             <Typography variant="body1" className={classes.spellDurationText}>
-              Duration ....... { user.spells[spellIdx].duration }
+              { user.spells[spellIdx].duration }
             </Typography>
           </div>
 
