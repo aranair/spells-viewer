@@ -140,10 +140,9 @@ const MySpells = observer((): JSX.Element | null => {
     spellsCount = user.spells.length;
   }
 
-  const spellSchool = user.spells && user.spells[spellIdx].school || 'none';
+  const spellSchool = user.spells && user.spells[spellIdx].school || 'chromatic';
   var backgroundImage = `url("/img/spellbook_${spellSchool}.png") no-repeat`;
 
-  // background: `url("/img/spellbook_${school}.png") no-repeat`,
   return (
     <div className={classes.wrapper}>
     <div className={classes.spellBookContainer} style={{ background: backgroundImage }}>
