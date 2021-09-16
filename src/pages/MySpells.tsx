@@ -167,7 +167,7 @@ const MySpells = observer((): JSX.Element | null => {
     spellsCount = user.spells.length;
   }
 
-  const spellSchool = user.spells && user.spells[spellIdx].school || Object.keys(spellColors)[getRandomInt(8)];
+  const spellSchool = user.spells && spellsCount > 0 && user.spells[spellIdx].school || Object.keys(spellColors)[getRandomInt(8)];
   const backgroundImage = `url("/img/spellbook_${spellSchool}.png") no-repeat`;
   const textColor = spellColors[spellSchool];
   const nameTextColor = nameTextColors[spellSchool];
@@ -185,7 +185,7 @@ const MySpells = observer((): JSX.Element | null => {
         }
       </div>
       {
-        user.spells && (
+        user.spells && spellsCount > 0 && (
         <div>
           <div className={classes.spellImageContainer}>
               <img width="342px" height="342px" src={`https://spells-explorer.s3.amazonaws.com/images/${user.spells[spellIdx].name.split(' ').map(s => s.toLowerCase()).join('-')}.png`} alt={`${user.spells[spellIdx].name}`} />
