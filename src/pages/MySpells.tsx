@@ -167,7 +167,10 @@ const MySpells = observer((): JSX.Element | null => {
     spellsCount = user.spells.length;
   }
 
-  const spellSchool = user.spells && spellsCount > 0 && user.spells[spellIdx].school || Object.keys(spellColors)[getRandomInt(8)];
+  var spellSchool = user.spells && spellsCount > 0 && user.spells[spellIdx].school || Object.keys(spellColors)[getRandomInt(8)];
+  if (spellSchool.length === 0) {
+    spellSchool = Object.keys(spellColors)[getRandomInt(8)];
+  }
   const backgroundImage = `url("/img/spellbook_${spellSchool}.png") no-repeat`;
   const textColor = spellColors[spellSchool];
   const nameTextColor = nameTextColors[spellSchool];
