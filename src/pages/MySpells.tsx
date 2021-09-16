@@ -43,35 +43,35 @@ const useStyles = makeStyles((theme) => ({
     position: 'relative',
     display: 'block',
     top: -210,
-    left: 215,
+    left: 218,
     textAlign: 'center',
   },
   spellNameContainer: {
     position: 'relative',
     display: 'block',
     width: 400,
-    top: -200,
+    top: -202,
     left: 515,
     textAlign: 'center',
   },
   spellSchoolContainer: {
     position: 'relative',
     width: 400,
-    top: -150,
+    top: -155,
     left: 548,
     textAlign: 'left',
   },
   spellRangeContainer: {
     position: 'relative',
     width: 400,
-    top: -100,
+    top: -105,
     left: 548,
     textAlign: 'left',
   },
   spellDurationContainer: {
     position: 'relative',
     width: 400,
-    top: -50,
+    top: -55,
     left: 548,
     textAlign: 'left',
   },
@@ -89,13 +89,13 @@ const useStyles = makeStyles((theme) => ({
   prevContainer: {
     position: 'relative',
     top: 5,
-    left: 90,
+    left: 88,
     textAlign: 'left',
   },
   nextContainer: {
     width: 100,
     position: 'relative',
-    top: -20,
+    top: -22,
     left: 870,
     textAlign: 'left',
   },
@@ -174,6 +174,7 @@ const MySpells = observer((): JSX.Element | null => {
   const backgroundImage = `url("/img/spellbook_${spellSchool.toLowerCase()}.png") no-repeat`;
   const textColor = spellColors[spellSchool];
   const nameTextColor = nameTextColors[spellSchool];
+  const spellName = user.spells && spellsCount > 0 && user.spells[spellIdx].name || '';
 
   return (
     <div className={classes.wrapper}>
@@ -191,7 +192,7 @@ const MySpells = observer((): JSX.Element | null => {
         user.spells && spellsCount > 0 && (
         <div>
           <div className={classes.spellImageContainer}>
-              <img width="342px" height="342px" src={`https://spells-explorer.s3.amazonaws.com/images/${user.spells[spellIdx].name.split(' ').map(s => s.toLowerCase()).join('-')}.png`} alt={`${user.spells[spellIdx].name}`} />
+              <img width="342px" height="342px" src={`https://spells-explorer.s3.amazonaws.com/images/${spellName.replace(':','').split(' ').map(s => s.toLowerCase()).join('-')}.png`} alt={`${spellName}`} />
           </div>
 
           <div className={classes.nameTextContainer}>
@@ -199,12 +200,12 @@ const MySpells = observer((): JSX.Element | null => {
           </div>
 
           <div className={classes.spellNameContainer}>
-            <Typography variant="body1" style={{ color: textColor }}> { user.spells[spellIdx].name } </Typography>
+            <Typography variant="body1" style={{ color: textColor }}> { spellName } </Typography>
           </div>
 
           <div className={classes.spellSchoolContainer}>
             <Typography variant="body1" className={classes.spellSchoolText}>
-              School .......... { user.spells[spellIdx].school }
+              School .......... { spellSchool }
             </Typography>
           </div>
 
