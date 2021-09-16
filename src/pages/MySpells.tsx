@@ -129,6 +129,33 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const spellColors: { [name: string]: string } = {
+  Abjuration: '#3e7172',
+  Conjuration: '#b1621f',
+  Divination: 'white',
+  Enchantment: '#bf971a',
+  Evocation: '#7e5269',
+  Illusion: '#374e6c',
+  Necromancy: '#3a362c',
+  Transmutation: '#576e3d',
+}
+
+const nameTextColors: { [name: string]: string } = {
+  Abjuration: '#3e7172',
+  Conjuration: '#b1621f',
+  Divination: '#a28e77',
+  Enchantment: '#bf971a',
+  Evocation: '#7e5269',
+  Illusion: '#374e6c',
+  Necromancy: '#3a362c',
+  Transmutation: '#576e3d',
+}
+
+const getRandomInt = (max: number) => {
+  const rd: number = Math.random();
+  return Math.floor(rd * max);
+}
+
 const MySpells = observer((): JSX.Element | null => {
   const classes = useStyles(mainTheme);
   const store = useContext(StoreContext);
@@ -140,8 +167,10 @@ const MySpells = observer((): JSX.Element | null => {
     spellsCount = user.spells.length;
   }
 
-  const spellSchool = user.spells && user.spells[spellIdx].school || 'chromatic';
-  var backgroundImage = `url("/img/spellbook_${spellSchool}.png") no-repeat`;
+  const spellSchool = user.spells && user.spells[spellIdx].school || Object.keys(spellColors)[getRandomInt(8)];
+  const backgroundImage = `url("/img/spellbook_${spellSchool}.png") no-repeat`;
+  const textColor = spellColors[spellSchool];
+  const nameTextColor = nameTextColors[spellSchool];
 
   return (
     <div className={classes.wrapper}>
@@ -167,7 +196,7 @@ const MySpells = observer((): JSX.Element | null => {
           </div>
 
           <div className={classes.spellNameContainer}>
-            <Typography variant="body1" className={classes.spellNameText}> { user.spells[spellIdx].name } </Typography>
+            <Typography variant="body1" style={{ color: textColor }}> { user.spells[spellIdx].name } </Typography>
           </div>
 
           <div className={classes.spellSchoolContainer}>
