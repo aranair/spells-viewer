@@ -171,7 +171,7 @@ const MySpells = observer((): JSX.Element | null => {
   if (spellSchool.length === 0) {
     spellSchool = Object.keys(spellColors)[getRandomInt(8)];
   }
-  const backgroundImage = `url("/img/spellbook_${spellSchool}.png") no-repeat`;
+  const backgroundImage = `url("/img/spellbook_${spellSchool.toLowerCase()}.png") no-repeat`;
   const textColor = spellColors[spellSchool];
   const nameTextColor = nameTextColors[spellSchool];
 
