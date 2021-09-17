@@ -248,7 +248,7 @@ const MySpells = observer((): JSX.Element | null => {
         Crafted by <Link href="https://twitter.com/ozzzmabro" className={classes.link}>Ozzz</Link> & <Link href="https://twitter.com/aranair" className={classes.link}>aranair</Link>
       </Typography>
       <Typography>
-        Contract by <Link href="https://twitter.com/tv3636" className={classes.link}>tv3636</Link>, Niski & <Link href="https://twitter.com/aranair" className={classes.link}>aranair</Link>
+        Contract by <Link href="https://twitter.com/tv3636" className={classes.link}>tv3636</Link>, <Link href="https://twitter.com/niski_iski" className={classes.link}>Niski</Link> & <Link href="https://twitter.com/aranair" className={classes.link}>aranair</Link>
       </Typography>
     </div>
     </div>
