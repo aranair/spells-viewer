@@ -39,6 +39,9 @@ export default function Routes(): JSX.Element {
        <a href="https://github.com/aranair/spells-viewer" target="_blank" rel="noreferrer" className={classes.link}>
          <GitHubIcon />
        </a>
+       <a href="http://forgottenrunes.com/" target="_blank" rel="noreferrer" className={classes.link}>
+         <img width="50px" src={`/img/wizard8935.png`} alt={`forgotten-runes-wizard-8935`} />
+       </a>
     </div>
   );
 }
