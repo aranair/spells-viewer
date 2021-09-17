@@ -30,10 +30,10 @@ export default function Routes(): JSX.Element {
     <div className={classes.footerContainer}>
       {
         location.pathname === '/' &&
-        <Link to="#" className={classes.link} onClick={() => history.push("/explore")}><ListAltIcon /></Link>
+        <Link to="#" className={classes.link} onClick={() => history.push("/list")}><ListAltIcon /></Link>
       }
       {
-        location.pathname === '/explore' &&
+        location.pathname !== '/' &&
         <Link to="#" className={classes.link} onClick={() => history.push("/")}><AccessibilityNewIcon /></Link>
       }
        <a href="https://github.com/aranair/spells-viewer" target="_blank" rel="noreferrer" className={classes.link}>

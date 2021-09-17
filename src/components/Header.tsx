@@ -12,14 +12,17 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function Routes(): JSX.Element {
+interface HeaderProps {
+  text: String;
+}
+
+export default function Header(props: HeaderProps): JSX.Element {
+  const { text } = props;
   const classes = useStyles(mainTheme);
 
   return (
     <Container className={classes.headerContainer}>
-      <Typography variant="h5" component="h1">
-        Spells (for Wizards and other Adventurers)
-      </Typography>
+      <Typography variant="h5" component="h1">{text}</Typography>
     </Container>
   );
 }

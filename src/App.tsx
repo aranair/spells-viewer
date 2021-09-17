@@ -18,8 +18,7 @@ const App = observer((): JSX.Element => {
       <ThemeProvider theme={mainTheme}>
         <div className="App">
           <Router>
-            <Header />
-              <Routes />
+            <Routes />
             <Footer />
           </Router>
         </div>

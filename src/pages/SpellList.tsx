@@ -1,4 +1,5 @@
 import {
+  Container,
   makeStyles,
   Typography,
 } from '@material-ui/core';
@@ -7,6 +8,7 @@ import React from 'react';
 import { observer } from 'mobx-react-lite';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { mainTheme } from '../theme';
+import Header  from '../components/Header';
 
 import spells from '../spells.json';
 
@@ -35,6 +37,8 @@ const SpellList = observer((): JSX.Element | null => {
   const classes = useStyles(mainTheme);
 
   return (
+    <>
+    <Header text="Spells (for Wizards and other Adventurers)" />
     <div className={classes.spellListContainer}>
       <div className={classes.helperContainer}>
         <Typography>
@@ -44,6 +48,7 @@ const SpellList = observer((): JSX.Element | null => {
 
       <DataGrid rows={spells} columns={columns} />
     </div>
+    </>
   );
 });
 
