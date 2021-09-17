@@ -1,3 +1,3 @@
-# Wizard Spells Viewer
+# Wizard Spells 
 
-https://spells-explorer.s3.us-east-1.amazonaws.com/index.html
+https://wizardspellbook.com
