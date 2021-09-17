@@ -22,20 +22,18 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
   },
   spellBookContainer: {
-    display: 'flex',
-    flexDirection: 'column',
     marginLeft: 'auto',
     marginRight: 'auto',
-    width: '1000px',
-    height: '570px',
+    width: 1000,
+    height: 570,
   },
   spellBookContentContainer:{
     display: 'flex',
     flexDirection: 'row',
-    flex: 1,
+    height: 435,
   },
   spellBookActionsContainer: {
-    flex: 2,
+    height: 100,
   },
   spellBookLeftContainer: {
     flex: 1,
