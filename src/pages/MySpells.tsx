@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
     width: '300px',
     height: '300px',
     position: 'relative',
-    top: 72,
+    top: 70,
     left: 104,
   },
   nameTextContainer: {
@@ -191,7 +191,7 @@ const MySpells = observer((): JSX.Element | null => {
         user.spells && spellsCount > 0 && (
         <div>
           <div className={classes.spellImageContainer}>
-              <img width="342px" height="342px" src={`https://spells-explorer.s3.amazonaws.com/images/${spellName.replace(':','').split(' ').map(s => s.toLowerCase()).join('-')}.png`} alt={`${spellName}`} />
+              <img width="345px" height="345px" src={`https://spells-explorer.s3.amazonaws.com/images/${spellName.replace(':','').split(' ').map(s => s.toLowerCase()).join('-')}.png`} alt={`${spellName}`} />
           </div>
 
           <div className={classes.nameTextContainer}>
