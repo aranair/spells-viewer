@@ -22,8 +22,33 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
   },
   spellBookContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    marginLeft: 'auto',
+    marginRight: 'auto',
     width: '1000px',
     height: '570px',
+  },
+  spellBookContentContainer:{
+    display: 'flex',
+    flexDirection: 'row',
+    flex: 1,
+  },
+  spellBookActionsContainer: {
+    flex: 2,
+  },
+  spellBookLeftContainer: {
+    flex: 1,
+  },
+  spellBookRightContainer: {
+    flex: 1,
+  },
+  spellAttributesContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    height: 220,
+    paddingLeft: 50,
+    marginTop: 15,
   },
   connectButtonContainer: {
     position: 'relative',
@@ -40,40 +65,48 @@ const useStyles = makeStyles((theme) => ({
     left: 104,
   },
   nameTextContainer: {
-    position: 'relative',
     display: 'block',
-    top: -210,
-    left: 218,
+    position: 'relative',
+    left: 168,
     textAlign: 'center',
+    width: 100,
+    marginTop: 90,
   },
   spellNameContainer: {
     position: 'relative',
     display: 'block',
-    width: 400,
-    top: -202,
-    left: 515,
+    width: 300,
     textAlign: 'center',
+    left: 70,
+    paddingTop: 8,
+    height: 35,
   },
   spellSchoolContainer: {
     position: 'relative',
     width: 400,
-    top: -155,
-    left: 548,
     textAlign: 'left',
+    flex: 1,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
   },
   spellRangeContainer: {
     position: 'relative',
     width: 400,
-    top: -105,
-    left: 548,
     textAlign: 'left',
+    flex: 1,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
   },
   spellDurationContainer: {
     position: 'relative',
     width: 400,
-    top: -55,
-    left: 548,
     textAlign: 'left',
+    flex: 1,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
   },
   nameText: { color: theme.palette.secondary.main, },
   spellNameText: {
@@ -184,72 +217,95 @@ const MySpells = observer((): JSX.Element | null => {
 
   return (
     <div className={classes.wrapper}>
-    <div className={classes.spellBookContainer} style={{ background: backgroundImage }}>
-      <div className={classes.connectButtonContainer}>
-        {
-          !user.wallet && (
-          <Button variant="contained" color="secondary" onClick={user.connect}>
-            Connect
-          </Button>
-          )
-        }
-      </div>
-      {
-        user.spells && spellsCount > 0 && (
-        <div>
-          <div className={classes.spellImageContainer}>
-              <img width="343px" height="349px" src={`https://spells-explorer.s3.amazonaws.com/images/${spellName.replace(':','').split(' ').map(s => s.toLowerCase()).join('-')}.png`} alt={`${spellName}`} />
+      <div className={classes.spellBookContainer} style={{ background: backgroundImage }}>
+        <div className={classes.spellBookContentContainer}>
+          <div className={classes.spellBookLeftContainer}>
+            {
+              !user.wallet && (
+                <div className={classes.connectButtonContainer}>
+                  <Button variant="contained" color="secondary" onClick={user.connect}>
+                    Connect
+                  </Button>
+                </div>
+              )
+            }
+            {
+              user.spells && spellsCount > 0 && (
+                <div className={classes.spellImageContainer}>
+                    <img width="343px" height="349px" src={`https://spells-explorer.s3.amazonaws.com/images/${spellName.replace(':','').split(' ').map(s => s.toLowerCase()).join('-')}.png`} alt={`${spellName}`} />
+                </div>
+              )
+            }
           </div>
 
-          <div className={classes.nameTextContainer}>
-            <Typography variant="body1" className={classes.nameText}> :Name: </Typography>
-          </div>
+          <div className={classes.spellBookRightContainer}>
+            {
+              user.spells && spellsCount > 0 && (
+                <>
+                  <div className={classes.nameTextContainer}>
+                    <Typography variant="body1" className={classes.nameText}> :Name: </Typography>
+                  </div>
 
-          <div className={classes.spellNameContainer}>
-            <Typography variant="body1" style={{ color: textColor }}> { spellName } </Typography>
-          </div>
+                  <div className={classes.spellNameContainer}>
+                    <Typography variant="body1" style={{ color: textColor }}> { spellName } </Typography>
+                  </div>
 
-          <div className={classes.spellSchoolContainer}>
-            <Typography variant="body1" className={classes.spellSchoolText}>
-              School .......... { spellSchool }
-            </Typography>
-          </div>
+                  <div className={classes.spellAttributesContainer}>
+                    <div className={classes.spellSchoolContainer}>
+                      <Typography variant="body1" className={classes.spellSchoolText}>
+                        School .......... { spellSchool }
+                      </Typography>
+                    </div>
 
-          <div className={classes.spellRangeContainer}>
-            <Typography variant="body1" className={classes.spellRangeText}>
-              Range ........... { user.spells[spellIdx].range }
-            </Typography>
-          </div>
+                    <div className={classes.spellRangeContainer}>
+                      <Typography variant="body1" className={classes.spellRangeText}>
+                        Range ........... { user.spells[spellIdx].range }
+                      </Typography>
+                    </div>
 
-          <div className={classes.spellDurationContainer}>
-            <Typography variant="body1" className={classes.spellDurationText}>
-              { user.spells[spellIdx].duration }
-            </Typography>
-          </div>
-
-          <div className={classes.prevContainer}>
-            <Typography variant="body1" className={classes.prevText} onClick={goPrevPage} >
-            Prev
-            </Typography>
-          </div>
-
-          <div className={classes.nextContainer}>
-            <Typography variant="body1" className={classes.nextText} onClick={goNextPage} >
-              Next
-            </Typography>
+                    <div className={classes.spellDurationContainer}>
+                      <Typography variant="body1" className={classes.spellDurationText}>
+                        { user.spells[spellIdx].duration }
+                      </Typography>
+                    </div>
+                  </div>
+                </>
+              )
+            }
           </div>
         </div>
-        )
-      }
-    </div>
-    <div className={classes.creditsContainer}>
-      <Typography>
-        Crafted by <Link href="https://twitter.com/ozzzmabro" className={classes.link}>Ozzz</Link> & <Link href="https://twitter.com/aranair" className={classes.link}>aranair</Link>
-      </Typography>
-      <Typography>
-        Contract by <Link href="https://twitter.com/tv3636" className={classes.link}>tv3636</Link>, <Link href="https://twitter.com/niski_iski" className={classes.link}>Niski</Link> & <Link href="https://twitter.com/aranair" className={classes.link}>aranair</Link>
-      </Typography>
-    </div>
+
+        <div className={classes.spellBookActionsContainer}>
+          {
+            user.spells && spellsCount > 0 && (
+              <>
+                <div className={classes.prevContainer}>
+                  <Typography variant="body1" className={classes.prevText} onClick={goPrevPage} >
+                  Prev
+                  </Typography>
+                </div>
+
+                <div className={classes.nextContainer}>
+                  <Typography variant="body1" className={classes.nextText} onClick={goNextPage} >
+                    Next
+                  </Typography>
+                </div>
+              </>
+            )
+          }
+        </div>
+
+      </div>
+
+      <div className={classes.creditsContainer}>
+        <Typography>
+          Crafted by <Link href="https://twitter.com/ozzzmabro" className={classes.link}>Ozzz</Link> & <Link href="https://twitter.com/aranair" className={classes.link}>aranair</Link>
+        </Typography>
+
+        <Typography>
+          Contract by <Link href="https://twitter.com/tv3636" className={classes.link}>tv3636</Link>, <Link href="https://twitter.com/niski_iski" className={classes.link}>Niski</Link> & <Link href="https://twitter.com/aranair" className={classes.link}>aranair</Link>
+        </Typography>
+      </div>
     </div>
   );
 });
