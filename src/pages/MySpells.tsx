@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
     position: 'relative',
     display: 'block',
     top: 200,
-    left: -220,
+    left: 30,
     textAlign: 'center',
   },
   spellImageContainer: {
