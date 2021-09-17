@@ -140,16 +140,16 @@ const spellColors: { [name: string]: string } = {
   Transmutation: '#576e3d',
 }
 
-const nameTextColors: { [name: string]: string } = {
-  Abjuration: '#3e7172',
-  Conjuration: '#b1621f',
-  Divination: '#a28e77',
-  Enchantment: '#bf971a',
-  Evocation: '#7e5269',
-  Illusion: '#374e6c',
-  Necromancy: '#3a362c',
-  Transmutation: '#576e3d',
-}
+// const nameTextColors: { [name: string]: string } = {
+//   Abjuration: '#3e7172',
+//   Conjuration: '#b1621f',
+//   Divination: '#a28e77',
+//   Enchantment: '#bf971a',
+//   Evocation: '#7e5269',
+//   Illusion: '#374e6c',
+//   Necromancy: '#3a362c',
+//   Transmutation: '#576e3d',
+// }
 
 const getRandomInt = (max: number) => {
   const rd: number = Math.random();
@@ -167,14 +167,13 @@ const MySpells = observer((): JSX.Element | null => {
     spellsCount = user.spells.length;
   }
 
-  var spellSchool = user.spells && spellsCount > 0 && user.spells[spellIdx].school || Object.keys(spellColors)[getRandomInt(8)];
+  var spellSchool = (user.spells && spellsCount > 0 && user.spells[spellIdx].school) || Object.keys(spellColors)[getRandomInt(8)];
   if (spellSchool.length === 0) {
     spellSchool = Object.keys(spellColors)[getRandomInt(8)];
   }
   const backgroundImage = `url("/img/spellbook_${spellSchool.toLowerCase()}.png") no-repeat`;
   const textColor = spellColors[spellSchool];
-  const nameTextColor = nameTextColors[spellSchool];
-  const spellName = user.spells && spellsCount > 0 && user.spells[spellIdx].name || '';
+  const spellName = (user.spells && spellsCount > 0 && user.spells[spellIdx].name) || '';
 
   return (
     <div className={classes.wrapper}>
