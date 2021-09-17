@@ -163,7 +163,7 @@ const MySpells = observer((): JSX.Element | null => {
   const [spellIdx, setSpellIdx] = useState(0);
 
   let spellsCount = 0;
-  if (user.spells && user.spells.length > 0) {
+  if (user.spells) {
     spellsCount = user.spells.length;
   }
 
@@ -174,6 +174,13 @@ const MySpells = observer((): JSX.Element | null => {
   const backgroundImage = `url("/img/spellbook_${spellSchool.toLowerCase()}.png") no-repeat`;
   const textColor = spellColors[spellSchool];
   const spellName = (user.spells && spellsCount > 0 && user.spells[spellIdx].name) || '';
+
+  const goPrevPage = () => {
+    var prevPage = spellIdx - 1;
+    if (prevPage < 0) { prevPage = spellsCount - 1; }
+    setSpellIdx(prevPage);
+  }
+  const goNextPage = () => setSpellIdx((spellIdx + 1) % spellsCount);
 
   return (
     <div className={classes.wrapper}>
@@ -221,21 +228,13 @@ const MySpells = observer((): JSX.Element | null => {
           </div>
 
           <div className={classes.prevContainer}>
-            <Typography
-               variant="body1"
-               className={classes.prevText}
-               onClick={() => setSpellIdx((spellIdx - 1) % spellsCount || 0)}
-            >
+            <Typography variant="body1" className={classes.prevText} onClick={goPrevPage} >
             Prev
             </Typography>
           </div>
 
           <div className={classes.nextContainer}>
-            <Typography
-               variant="body1"
-               className={classes.nextText}
-               onClick={() => setSpellIdx((spellIdx + 1) % spellsCount || 0)}
-            >
+            <Typography variant="body1" className={classes.nextText} onClick={goNextPage} >
               Next
             </Typography>
           </div>
