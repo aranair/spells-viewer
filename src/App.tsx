@@ -6,7 +6,6 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import { mainTheme } from './theme';
 import { StoreProvider } from './store/StoreContext';
 import store from './store/RootStore';
-import Header from './components/Header';
 import Footer from './components/Footer';
 import Routes from './components/Routes';
 
