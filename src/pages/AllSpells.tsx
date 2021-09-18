@@ -4,7 +4,6 @@ import Header  from '../components/Header';
 import spellsList from '../spells.json';
 
 const AllSpells = observer((): JSX.Element | null => {
-
   return (
     <>
       <Header text="The Hidden Book of All Spells" />

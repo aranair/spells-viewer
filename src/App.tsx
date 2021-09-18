@@ -6,7 +6,7 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import { mainTheme } from './theme';
 import { StoreProvider } from './store/StoreContext';
 import store from './store/RootStore';
-import Footer from './components/Footer';
+import TopNav from './components/TopNav';
 import Routes from './components/Routes';
 
 import './App.css';
@@ -18,7 +18,7 @@ const App = observer((): JSX.Element => {
         <div className="App">
           <Router>
             <Routes />
-            <Footer />
+            <TopNav />
           </Router>
         </div>
       </ThemeProvider>

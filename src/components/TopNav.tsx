@@ -10,11 +10,11 @@ import { Link, useHistory, useLocation } from 'react-router-dom';
 import { mainTheme } from '../theme';
 
 const useStyles = makeStyles((theme) => ({
-  footerContainer: {
+  topNavContainer: {
     position: 'absolute',
-    bottom: 10,
+    top: 10,
     right: 10,
-    [theme.breakpoints.down('md')]: {
+    [theme.breakpoints.down('sm')]: {
       display: 'none'
     },
   },
@@ -30,7 +30,7 @@ export default function Routes(): JSX.Element {
   const history = useHistory();
 
   return (
-    <div className={classes.footerContainer}>
+    <div className={classes.topNavContainer}>
       {
         location.pathname === '/' &&
         <Link to="#" className={classes.link} onClick={() => history.push("/list")}><ListAltIcon /></Link>
@@ -46,7 +46,7 @@ export default function Routes(): JSX.Element {
          <img width="25px" src={`/img/etherscan-logo-light-circle.png`} alt={`wizardspell-contract`} />
        </a>
        <a href="http://forgottenrunes.com/" target="_blank" rel="noreferrer" className={classes.link}>
-         <img width="50px" src={`/img/wizard8935.png`} alt={`forgotten-runes-wizard-8935`} />
+         <img width="35px" src={`/img/wizard8935.png`} alt={`forgotten-runes-wizard-8935`} />
        </a>
     </div>
   );
