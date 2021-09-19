@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundRepeat: 'no-repeat',
   },
   wizardImage: {
-    paddingLeft: 20,
+    paddingLeft: 35,
   },
   wizardContainer: {
     width: 450,
