@@ -33,10 +33,27 @@ const useStyles = makeStyles((theme) => ({
     width: 1000,
     height: 570,
   },
+  wizardNameContainer: {
+    textAlign: 'center',
+    width: 240,
+    height: 70,
+    marginLeft: 90,
+    paddingTop: 15
+  },
+  wizardImageContainer: {
+    width: 450,
+    height: 450,
+    backgroundImage: 'url("/img/wizard_frame.png")',
+    backgroundSize: 'contain',
+    backgroundRepeat: 'no-repeat',
+  },
+  wizardImage: {
+    paddingLeft: 20,
+  },
   wizardContainer: {
-    width: 400,
-    height: 400,
-    marginTop: 80,
+    width: 450,
+    height: 450,
+    marginTop: 50,
     [theme.breakpoints.down('md')]: {
       display: 'none'
     },
@@ -335,11 +352,24 @@ const Spellbook = observer((props: SpellbookProps): JSX.Element | null => {
       </div>
 
       <div className={classes.wizardContainer}>
-        {
-          currentWizard && (
-              <img width="400px" height="400px" src={`https://nftz.forgottenrunes.com/wizards/alt/400-nobg/wizard-${currentWizard.id}.png`} alt={`${spellName}`} />
-          )
-        }
+        <div className={classes.wizardImageContainer}>
+          <div className={classes.wizardNameContainer}>
+          {
+            currentWizard && (
+              <Typography>
+                { currentWizard.name }
+              </Typography>
+            )
+          }
+          </div>
+          <div className={classes.wizardImage}>
+          {
+            currentWizard && (
+                <img width="350px" height="350px" src={`https://nftz.forgottenrunes.com/wizards/alt/400-nobg/wizard-${currentWizard.id}.png`} alt={`${spellName}`} />
+            )
+          }
+          </div>
+        </div>
       </div>
     </div>
   );
