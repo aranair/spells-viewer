@@ -235,7 +235,7 @@ const Spellbook = observer((props: SpellbookProps): JSX.Element | null => {
   }
 
   const goNextPage = () => setSpellIdx((spellIdx + 1) % spellsCount);
-  const currentWizard = spell && wizards && wizards.find(wiz => wiz.id == spell.id);
+  const currentWizard = spell && wizards && wizards.find(wiz => wiz.id === spell.id);
 
   return (
     <div className={classes.wrapper}>
