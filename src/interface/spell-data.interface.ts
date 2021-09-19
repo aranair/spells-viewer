@@ -1,5 +1,5 @@
 export interface SpellData {
-  id: Number;
+  id: number;
   name: string;
   school?: string;
   range: string;

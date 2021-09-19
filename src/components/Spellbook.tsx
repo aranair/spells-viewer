@@ -10,6 +10,7 @@ import { observer } from 'mobx-react-lite';
 import { mainTheme } from '../theme';
 import { StoreContext } from '../store/StoreContext';
 import { SpellData } from '../interface/spell-data.interface';
+import { WizardData } from '../interface/wizard-data.interface';
 
 const colors = {
   darkbrown: '#5B382B',
@@ -18,15 +19,27 @@ const colors = {
 const useStyles = makeStyles((theme) => ({
   wrapper:{
     display: 'flex',
-    alignItems: 'center',
+    alignItems: 'left',
+    justifyContent: 'center',
+    flexDirection: 'row',
+    minWidth: 1000,
+  },
+  spellBookWrapper:{
+    display: 'flex',
     justifyContent: 'center',
     flexDirection: 'column',
   },
   spellBookContainer: {
-    marginLeft: 'auto',
-    marginRight: 'auto',
     width: 1000,
     height: 570,
+  },
+  wizardContainer: {
+    width: 400,
+    height: 400,
+    marginTop: 80,
+    [theme.breakpoints.down('md')]: {
+      display: 'none'
+    },
   },
   spellBookContentContainer:{
     display: 'flex',
@@ -158,6 +171,7 @@ const useStyles = makeStyles((theme) => ({
   creditsContainer: {
     width: 950,
     textAlign: 'right',
+    color: 'gray',
   },
   link: {
     textDecoration: 'none',
@@ -185,6 +199,7 @@ const getRandomInt = (max: number) => {
 }
 
 interface SpellbookProps {
+  wizards: WizardData[];
   spells: SpellData[];
   filteredByUser: boolean;
 }
@@ -194,10 +209,11 @@ const Spellbook = observer((props: SpellbookProps): JSX.Element | null => {
   const store = useContext(StoreContext);
   const { user } = store;
   const [spellIdx, setSpellIdx] = useState(0);
-  var { spells, filteredByUser } = props;
+  var { wizards, spells, filteredByUser } = props;
 
   if(filteredByUser) {
     spells = user.spells || [];
+    wizards = user.wizards || [];
   }
 
   var spellsCount = 0;
@@ -209,110 +225,121 @@ const Spellbook = observer((props: SpellbookProps): JSX.Element | null => {
   }
   const backgroundImage = `url("/img/spellbook_${spellSchool.toLowerCase()}.png") no-repeat`;
   const textColor = spellColors[spellSchool];
-  const spellName = (spells && spellsCount > 0 && spells[spellIdx].name) || '';
+  const spell = spells && spellsCount > 0 && spells[spellIdx];
+  let spellName = (spell && spell.name) || '';
 
   const goPrevPage = () => {
     var prevPage = spellIdx - 1;
     if (prevPage < 0) { prevPage = spellsCount - 1; }
     setSpellIdx(prevPage);
   }
+
   const goNextPage = () => setSpellIdx((spellIdx + 1) % spellsCount);
+  const currentWizard = spell && wizards && wizards.find(wiz => wiz.id == spell.id);
 
   return (
     <div className={classes.wrapper}>
-      <div className={classes.spellBookContainer} style={{ background: backgroundImage }}>
-        <div className={classes.spellBookContentContainer}>
-          <div className={classes.spellBookLeftContainer}>
-            {
-              filteredByUser && !user.wallet && (
-                <div className={classes.connectButtonContainer}>
-                  <Button variant="contained" color="secondary" onClick={user.connect}>
-                    Connect
-                  </Button>
-                </div>
-              )
-            }
-            {
-              spells && spellsCount > 0 && (
-                <>
-                  <div className={classes.spellIdContainer}>
-                    <Typography variant="body1" style={{ color: textColor }}>{spells[spellIdx].id}</Typography>
+      <div className={classes.spellBookWrapper}>
+        <div className={classes.spellBookContainer} style={{ background: backgroundImage }}>
+          <div className={classes.spellBookContentContainer}>
+            <div className={classes.spellBookLeftContainer}>
+              {
+                filteredByUser && !user.wallet && (
+                  <div className={classes.connectButtonContainer}>
+                    <Button variant="contained" color="secondary" onClick={user.connect}>
+                      Connect
+                    </Button>
                   </div>
-                  <div className={classes.spellImageContainer}>
-                      <img width="343px" height="349px" src={`https://spells-explorer.s3.amazonaws.com/images/${spellName.replace(':','').split(' ').map(s => s.toLowerCase()).join('-')}.png`} alt={`${spellName}`} />
-                  </div>
-                </>
-              )
-            }
+                )
+              }
+              {
+                spells && spellsCount > 0 && (
+                  <>
+                    <div className={classes.spellIdContainer}>
+                      <Typography variant="body1" style={{ color: textColor }}>{spells[spellIdx].id}</Typography>
+                    </div>
+                    <div className={classes.spellImageContainer}>
+                        <img width="343px" height="349px" src={`https://spells-explorer.s3.amazonaws.com/images/${spellName.replace(':','').split(' ').map(s => s.toLowerCase()).join('-')}.png`} alt={`${spellName}`} />
+                    </div>
+                  </>
+                )
+              }
+            </div>
+
+            <div className={classes.spellBookRightContainer}>
+              {
+                spells && spellsCount > 0 && (
+                  <>
+                    <div className={classes.nameTextContainer}>
+                      <Typography variant="body1" className={classes.nameText}> :Name: </Typography>
+                    </div>
+
+                    <div className={classes.spellNameContainer}>
+                      <Typography variant="body1" style={{ color: textColor }}> { spellName } </Typography>
+                    </div>
+
+                    <div className={classes.spellAttributesContainer}>
+                      <div className={classes.spellSchoolContainer}>
+                        <Typography variant="body1" className={classes.spellSchoolText}>
+                          School .......... { spellSchool }
+                        </Typography>
+                      </div>
+
+                      <div className={classes.spellRangeContainer}>
+                        <Typography variant="body1" className={classes.spellRangeText}>
+                          Range ........... { spells[spellIdx].range }
+                        </Typography>
+                      </div>
+
+                      <div className={classes.spellDurationContainer}>
+                        <Typography variant="body1" className={classes.spellDurationText}>
+                          { spells[spellIdx].duration }
+                        </Typography>
+                      </div>
+                    </div>
+                  </>
+                )
+              }
+            </div>
           </div>
 
-          <div className={classes.spellBookRightContainer}>
+          <div className={classes.spellBookActionsContainer}>
             {
               spells && spellsCount > 0 && (
                 <>
-                  <div className={classes.nameTextContainer}>
-                    <Typography variant="body1" className={classes.nameText}> :Name: </Typography>
+                  <div className={classes.prevContainer}>
+                    <Typography variant="body1" className={classes.prevText} onClick={goPrevPage} >
+                    Prev
+                    </Typography>
                   </div>
 
-                  <div className={classes.spellNameContainer}>
-                    <Typography variant="body1" style={{ color: textColor }}> { spellName } </Typography>
-                  </div>
-
-                  <div className={classes.spellAttributesContainer}>
-                    <div className={classes.spellSchoolContainer}>
-                      <Typography variant="body1" className={classes.spellSchoolText}>
-                        School .......... { spellSchool }
-                      </Typography>
-                    </div>
-
-                    <div className={classes.spellRangeContainer}>
-                      <Typography variant="body1" className={classes.spellRangeText}>
-                        Range ........... { spells[spellIdx].range }
-                      </Typography>
-                    </div>
-
-                    <div className={classes.spellDurationContainer}>
-                      <Typography variant="body1" className={classes.spellDurationText}>
-                        { spells[spellIdx].duration }
-                      </Typography>
-                    </div>
+                  <div className={classes.nextContainer}>
+                    <Typography variant="body1" className={classes.nextText} onClick={goNextPage} >
+                      Next
+                    </Typography>
                   </div>
                 </>
               )
             }
           </div>
         </div>
+        <div className={classes.creditsContainer}>
+          <Typography>
+            Crafted by <Link href="https://twitter.com/ozzzmabro" className={classes.link}>Ozzz</Link> & <Link href="https://twitter.com/aranair" className={classes.link}>aranair</Link>
+          </Typography>
 
-        <div className={classes.spellBookActionsContainer}>
-          {
-            spells && spellsCount > 0 && (
-              <>
-                <div className={classes.prevContainer}>
-                  <Typography variant="body1" className={classes.prevText} onClick={goPrevPage} >
-                  Prev
-                  </Typography>
-                </div>
-
-                <div className={classes.nextContainer}>
-                  <Typography variant="body1" className={classes.nextText} onClick={goNextPage} >
-                    Next
-                  </Typography>
-                </div>
-              </>
-            )
-          }
+          <Typography>
+            Contract by <Link href="https://twitter.com/tv3636" className={classes.link}>tv3636</Link>, <Link href="https://twitter.com/niski_iski" className={classes.link}>Niski</Link> & <Link href="https://twitter.com/aranair" className={classes.link}>aranair</Link>
+          </Typography>
         </div>
-
       </div>
 
-      <div className={classes.creditsContainer}>
-        <Typography>
-          Crafted by <Link href="https://twitter.com/ozzzmabro" className={classes.link}>Ozzz</Link> & <Link href="https://twitter.com/aranair" className={classes.link}>aranair</Link>
-        </Typography>
-
-        <Typography>
-          Contract by <Link href="https://twitter.com/tv3636" className={classes.link}>tv3636</Link>, <Link href="https://twitter.com/niski_iski" className={classes.link}>Niski</Link> & <Link href="https://twitter.com/aranair" className={classes.link}>aranair</Link>
-        </Typography>
+      <div className={classes.wizardContainer}>
+        {
+          currentWizard && (
+              <img width="400px" height="400px" src={`https://nftz.forgottenrunes.com/wizards/alt/400-nobg/wizard-${currentWizard.id}.png`} alt={`${spellName}`} />
+          )
+        }
       </div>
     </div>
   );

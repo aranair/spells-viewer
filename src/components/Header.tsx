@@ -7,8 +7,15 @@ import { mainTheme } from '../theme';
 
 const useStyles = makeStyles((theme) => ({
   headerContainer: {
-    textAlign: 'center',
-    marginTop: 100,
+    margin: '100px auto 0 auto',
+    textAlign: 'left',
+    width: 1000,
+    [theme.breakpoints.down('md')]: {
+      color: 'transparent',
+    },
+    [theme.breakpoints.down('sm')]: {
+      marginTop: 15
+    },
   }
 }));
 

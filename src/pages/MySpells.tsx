@@ -6,7 +6,7 @@ const MySpells = observer((): JSX.Element | null => {
   return (
     <>
       <Header text="Spells (for Wizards and other Adventurers)" />
-      <Spellbook spells={[]} filteredByUser={true} />
+      <Spellbook spells={[]} wizards={[]} filteredByUser={true} />
     </>
   );
 });
